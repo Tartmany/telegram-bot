@@ -2,6 +2,7 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
+from keyboards.set_menu import set_main_menu
 from handlers import other_handlers, user_handlers
 from config.config import Config, load_config
 
@@ -27,6 +28,9 @@ async def main():
     # Создаем объекты бота и диспетчера
     bot: Bot = Bot(token=API_TOKEN, parse_mode='HTML')
     dp: Dispatcher = Dispatcher()
+
+    # Настраиваем кнопку Menu
+    await set_main_menu(bot)
 
     # Регистриуем роутеры в диспетчере
     dp.include_router(user_handlers.router)
